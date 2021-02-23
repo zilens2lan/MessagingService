@@ -1,14 +1,14 @@
 package main.java.com.zilen.messagingService.service.messageSendTo.messageSendToImpl;
 
 import main.java.com.zilen.messagingService.entity.Message;
-import main.java.com.zilen.messagingService.service.messageSendTo.MessageSendToFacebook;
+import main.java.com.zilen.messagingService.service.messageSendTo.MessageSendTo;
 
 import java.io.File;
 
-public class MessageSendToFacebookImpl implements MessageSendToFacebook {
+public class MessageSendToFacebookImpl implements MessageSendTo {
 
     @Override
-    public void messageSendToFacebook(Message message) {
+    public void messageSendTo(Message message) {
         for (File file : message.getFiles()) {
             String fileName = file.getName();
             if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {

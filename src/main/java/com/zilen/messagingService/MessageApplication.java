@@ -8,7 +8,5 @@ public class MessageApplication {
 
     public static void main(String[] args) {
         System.out.println("start");
-        MessagingService messagingService = new MessagingServiceImpl();
-        messagingService.viewMessage();
     }
 }

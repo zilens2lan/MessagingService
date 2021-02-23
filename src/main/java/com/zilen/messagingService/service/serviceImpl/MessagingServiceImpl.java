@@ -2,9 +2,7 @@ package main.java.com.zilen.messagingService.service.serviceImpl;
 
 import main.java.com.zilen.messagingService.entity.Message;
 import main.java.com.zilen.messagingService.service.*;
-import main.java.com.zilen.messagingService.service.messageSendTo.MessageSendToEmail;
-import main.java.com.zilen.messagingService.service.messageSendTo.MessageSendToFacebook;
-import main.java.com.zilen.messagingService.service.messageSendTo.MessageSendToSMS;
+import main.java.com.zilen.messagingService.service.messageSendTo.MessageSendTo;
 import main.java.com.zilen.messagingService.service.messageSendTo.messageSendToImpl.MessageSendToEmailImpl;
 import main.java.com.zilen.messagingService.service.messageSendTo.messageSendToImpl.MessageSendToFacebookImpl;
 import main.java.com.zilen.messagingService.service.messageSendTo.messageSendToImpl.MessageSendToSMSImpl;
@@ -29,13 +27,13 @@ public class MessagingServiceImpl implements MessagingService {
         FileAttachment fileAttachment = new FileAttachmentImpl();
         fileAttachment.fileAttachment(viewList.get(2));
 
-        MessageSendToSMS messageSendToSMS = new MessageSendToSMSImpl();
-        MessageSendToFacebook messageSendToFacebook = new MessageSendToFacebookImpl();
-        MessageSendToEmail messageSendToEmail = new MessageSendToEmailImpl();
+        MessageSendTo messageSendToSMS = new MessageSendToSMSImpl();
+        MessageSendTo messageSendToFacebook = new MessageSendToFacebookImpl();
+        MessageSendTo messageSendToEmail = new MessageSendToEmailImpl();
 
-        messageSendToEmail.messageSendToEmail(viewList.get(2));
-        messageSendToSMS.messageSendToSMS(viewList.get(2));
-        messageSendToFacebook.messageSendToFacebook(viewList.get(2));
+        messageSendToEmail.messageSendTo(viewList.get(2));
+        messageSendToSMS.messageSendTo(viewList.get(2));
+        messageSendToFacebook.messageSendTo(viewList.get(2));
 
         if (viewList.isEmpty()) {
             System.out.println("List is Empty");

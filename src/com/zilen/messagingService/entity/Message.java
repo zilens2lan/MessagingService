@@ -21,6 +21,6 @@ public class Message {
     private String text;
     @NonNull
     private Date date;
-    private List<Attachment> attachmentList;
+    private List<Attachment> attachments;
 
 }

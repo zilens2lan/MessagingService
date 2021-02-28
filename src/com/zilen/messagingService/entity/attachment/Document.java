@@ -8,11 +8,12 @@ import java.util.UUID;
 
 @Data
 @Builder(toBuilder = true)
-public class Document implements Attachment<Document> {
+public class Document implements Attachment {
 
     @NonNull
     private UUID id;
     @NonNull
     private String title;
     private String format;
+    private Byte size;
 }

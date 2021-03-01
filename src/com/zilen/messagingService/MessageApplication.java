@@ -9,10 +9,8 @@ import com.zilen.messagingService.service.EmailSender;
 import com.zilen.messagingService.service.FacebookSender;
 import com.zilen.messagingService.service.SMSSender;
 
-import java.sql.Time;
 import java.time.Duration;
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +42,7 @@ public class MessageApplication {
                 .id(UUID.randomUUID())
                 .sender("Zilen")
                 .text("Text Text Text")
-                .date(LocalDate.now())
+                .dateTime(LocalDateTime.now())
                 .attachments(List.of(document, picture, audio))
                 .build();
 

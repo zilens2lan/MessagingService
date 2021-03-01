@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public class Message {
     @NonNull
     private String text;
     @NonNull
-    private LocalDate date;
+    private LocalDateTime dateTime;
     private List<Attachment> attachments;
 
 }

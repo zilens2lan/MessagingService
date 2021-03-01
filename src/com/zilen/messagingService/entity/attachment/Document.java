@@ -15,5 +15,5 @@ public class Document implements Attachment {
     @NonNull
     private String title;
     private String format;
-    private Byte size;
+    private int size;
 }

@@ -10,6 +10,8 @@ import com.zilen.messagingService.service.FacebookSender;
 import com.zilen.messagingService.service.SMSSender;
 
 import java.sql.Time;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -36,14 +38,13 @@ public class MessageApplication {
                 .id(UUID.randomUUID())
                 .title("audio")
                 .format("mp3")
-                .duration(null)
+                .duration(Duration.ofSeconds(364))
                 .build();
-        Date date = new Date();
         Message message = Message.builder()
                 .id(UUID.randomUUID())
                 .sender("Zilen")
                 .text("Text Text Text")
-                .date(date)
+                .date(LocalDate.now())
                 .attachments(List.of(document, picture, audio))
                 .build();
 

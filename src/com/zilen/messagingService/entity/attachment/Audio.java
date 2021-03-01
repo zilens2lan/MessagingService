@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
-import java.sql.Time;
+import java.time.Duration;
 import java.util.UUID;
 
 @Data
@@ -16,6 +16,6 @@ public class Audio implements Attachment {
     @NonNull
     private String title;
     private String format;
-    private Time duration;
+    private Duration duration;
 
 }

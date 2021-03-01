@@ -18,7 +18,7 @@ public class FacebookSender implements ChannelSender {
                 .id(message.getId())
                 .sender(message.getText())
                 .text(message.getText())
-                .date(message.getDate())
+                .dateTime(message.getDateTime())
                 .attachments(message.getAttachments()
                         .stream()
                         .filter(attachment -> supportedAttachments.contains(attachment.getClass()))

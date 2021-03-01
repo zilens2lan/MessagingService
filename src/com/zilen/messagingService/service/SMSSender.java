@@ -10,7 +10,7 @@ public class SMSSender implements ChannelSender {
                 .id(message.getId())
                 .sender(message.getSender())
                 .text(message.getText())
-                .date(message.getDate())
+                .dateTime(message.getDateTime())
                 .attachments(null)
                 .build();
 

@@ -12,7 +12,7 @@ public class SMS implements Channel {
 
     @NonNull
     private UUID id;
-    private String sender;
+    private String userName;
     private String fromPhoneNumber;
     private String toPhoneNumber;
 }

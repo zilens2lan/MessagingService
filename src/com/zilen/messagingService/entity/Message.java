@@ -16,7 +16,7 @@ public class Message {
     @NonNull
     private UUID id;
     @NonNull
-    private String sender;
+    private String userName;
     @NonNull
     private String text;
     @NonNull

@@ -5,61 +5,36 @@ import com.zilen.messagingService.entity.channel.Channel;
 import com.zilen.messagingService.entity.channel.Email;
 import com.zilen.messagingService.entity.channel.Facebook;
 import com.zilen.messagingService.entity.channel.SMS;
+import com.zilen.messagingService.service.channelSender.ChannelSender;
 import com.zilen.messagingService.service.channelSender.EmailSender;
 import com.zilen.messagingService.service.channelSender.FacebookSender;
 import com.zilen.messagingService.service.channelSender.SMSSender;
 
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class MessageRedirectingService {
+
+    private List<ChannelSender> channelSenders;
+
+    public MessageRedirectingService(List<ChannelSender> channelSenders) {
+        this.channelSenders = channelSenders;
+    }
 
     public void redirect(Message message) {
         System.out.println("redirect");
 
-        SMS sms1 = SMS.builder()
-                .id(UUID.randomUUID())
-                .sender("Zilen")
-                .fromPhoneNumber("375297195905")
-                .toPhoneNumber("375295942824")
-                .build();
-        SMS sms3 = SMS.builder()
-                .id(UUID.randomUUID())
-                .sender("Zilen")
-                .fromPhoneNumber("375295979644")
-                .toPhoneNumber("375295942828")
-                .build();
-        SMS sms2 = SMS.builder()
-                .id(UUID.randomUUID())
-                .sender("Ripok")
-                .fromPhoneNumber("375295941828")
-                .toPhoneNumber("375295942825")
-                .build();
-        Email email = Email.builder()
-                .id(UUID.randomUUID())
-                .sender("Zilen")
-                .fromEmailAddress("ZilenS2Lan@mail.ru")
-                .toEmailAddress("zilens2lan@gmail.com")
-                .build();
-        Facebook facebook = Facebook.builder()
-                .id(UUID.randomUUID())
-                .sender("Zilen")
-                .fromFacebookId("@id_zilen")
-                .toFacebookId("@id_facebook")
-                .build();
+        UserService userService = new UserService();
+        List<Channel> channels = userService.getUserChannels(message.getUserName());
 
-        System.out.println("message: " + message.toString());
-
-        SMSSender sendSMS = new SMSSender();
-        FacebookSender sendFacebook = new FacebookSender();
-        EmailSender sendEmail = new EmailSender();
-
-        sendFacebook.send(message, facebook);
-        sendFacebook.send(message, sms1);
-        sendEmail.send(message, email);
-        sendSMS.send(message, sms1);
-        sendSMS.send(message, sms2);
-        sendSMS.send(message, sms3);
+        for (Channel channel : channels) {
+            for (ChannelSender channelSender : channelSenders) {
+                if (channel instanceof Facebook && channelSender instanceof FacebookSender)
+                    channelSender.send(message, channel);
+                if (channel instanceof Email && channelSender instanceof EmailSender)
+                    channelSender.send(message, channel);
+                if (channel instanceof SMS && channelSender instanceof SMSSender)
+                    channelSender.send(message, channel);
+            }
+        }
     }
 }

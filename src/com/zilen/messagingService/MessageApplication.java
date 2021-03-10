@@ -5,7 +5,11 @@ import com.zilen.messagingService.entity.Message;
 import com.zilen.messagingService.entity.attachment.Audio;
 import com.zilen.messagingService.entity.attachment.Document;
 import com.zilen.messagingService.entity.attachment.Picture;
+import com.zilen.messagingService.entity.channel.Facebook;
 import com.zilen.messagingService.service.MessageRedirectingService;
+import com.zilen.messagingService.service.channelSender.EmailSender;
+import com.zilen.messagingService.service.channelSender.FacebookSender;
+import com.zilen.messagingService.service.channelSender.SMSSender;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -39,14 +43,20 @@ public class MessageApplication {
 
         Message message = Message.builder()
                 .id(UUID.randomUUID())
-                .sender("Zilen")
+                .userName("Zilen")
                 .text("Text Text Text")
                 .dateTime(LocalDateTime.now())
                 .attachments(List.of(document, picture, audio))
                 .build();
 
-        MessageRedirectingService redirectingService = new MessageRedirectingService();
-        redirectingService.redirect(message);
+        System.out.println("message: " + message.toString());
+
+        EmailSender emailSender = new EmailSender();
+        FacebookSender facebookSender = new FacebookSender();
+        SMSSender smsSender = new SMSSender();
+
+        MessageRedirectingService messageRedirectingService = new MessageRedirectingService(List.of(smsSender, emailSender, facebookSender));
+        messageRedirectingService.redirect(message);
 
     }
 }

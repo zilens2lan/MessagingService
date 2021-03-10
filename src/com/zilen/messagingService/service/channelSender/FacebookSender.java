@@ -10,15 +10,20 @@ import com.zilen.messagingService.entity.channel.Facebook;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class FacebookSender implements ChannelSender {
+
+    List<Class<? extends Attachment>> supportedAttachments = List.of(Document.class, Picture.class);
 
     @Override
     public void send(Message message, Channel channel) {
-        List<Class<? extends Attachment>> supportedAttachments = List.of(Document.class, Picture.class);
+        assertTrue(channel instanceof Facebook, "WRONG TYPE!!!");
+        Facebook facebook = ((Facebook) channel);
 
         Message messageFiltered = Message.builder()
                 .id(message.getId())
-                .sender(message.getSender())
+                .userName(message.getUserName())
                 .text(message.getText())
                 .dateTime(message.getDateTime())
                 .attachments(message.getAttachments()
@@ -28,15 +33,7 @@ public class FacebookSender implements ChannelSender {
                 .build();
 
         System.out.println("message send to Facebook: " + messageFiltered.toString());
-
-        if (!channel.getSender().equals(message.getSender())) {
-            throw new IllegalStateException("facebook: sender is empty!");
-        }
-
-        try {
-            Facebook facebook = ((Facebook) channel);
-            System.out.println("facebook: sent from " + facebook.getFromFacebookId() + "to" + facebook.getToFacebookId());
-        }catch (ClassCastException ex){}
+        System.out.println("facebook: sent from " + facebook.getFromFacebookId() + " to " + facebook.getToFacebookId());
     }
 
 }

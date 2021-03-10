@@ -4,7 +4,4 @@ public interface Channel {
 
     String getSender();
 
-    String getFrom();
-
-    String getTo();
 }

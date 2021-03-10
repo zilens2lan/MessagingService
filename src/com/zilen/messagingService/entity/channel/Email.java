@@ -13,6 +13,6 @@ public class Email implements Channel {
     @NonNull
     private UUID id;
     private String sender;
-    private String from;
-    private String to;
+    private String fromEmailAddress;
+    private String toEmailAddress;
 }

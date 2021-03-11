@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MessageRedirectingService {
 
-    private List<ChannelSender> channelSenders;
+    private final List<ChannelSender> channelSenders;
 
     public MessageRedirectingService(List<ChannelSender> channelSenders) {
         this.channelSenders = channelSenders;
@@ -28,11 +28,9 @@ public class MessageRedirectingService {
 
         for (Channel channel : channels) {
             for (ChannelSender channelSender : channelSenders) {
-                if (channel instanceof Facebook && channelSender instanceof FacebookSender)
-                    channelSender.send(message, channel);
-                if (channel instanceof Email && channelSender instanceof EmailSender)
-                    channelSender.send(message, channel);
-                if (channel instanceof SMS && channelSender instanceof SMSSender)
+                if (channel instanceof Facebook && channelSender instanceof FacebookSender
+                        || channel instanceof Email && channelSender instanceof EmailSender
+                        || channel instanceof SMS && channelSender instanceof SMSSender)
                     channelSender.send(message, channel);
             }
         }

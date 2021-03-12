@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FacebookSender implements ChannelSender {
 
-    List<Class<? extends Attachment>> supportedAttachments = List.of(Document.class, Picture.class);
+    private static final List<Class<? extends Attachment>> supportedAttachments = List.of(Document.class, Picture.class);
 
     @Override
     public void send(Message message, Channel channel) {
@@ -36,4 +36,8 @@ public class FacebookSender implements ChannelSender {
         System.out.println("facebook: sent from " + facebook.getFromFacebookId() + " to " + facebook.getToFacebookId());
     }
 
+    @Override
+    public boolean supports(Channel channel) {
+        return channel instanceof Facebook;
+    }
 }

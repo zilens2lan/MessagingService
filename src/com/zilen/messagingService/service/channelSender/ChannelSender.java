@@ -6,4 +6,5 @@ import com.zilen.messagingService.entity.channel.Channel;
 public interface ChannelSender {
 
     void send(Message message, Channel channel);
+    boolean supports(Channel channel);
 }

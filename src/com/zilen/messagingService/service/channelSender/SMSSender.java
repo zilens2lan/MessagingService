@@ -24,4 +24,9 @@ public class SMSSender implements ChannelSender {
         System.out.println("message send to SMS: " + messageFiltered.toString());
         System.out.println("sms: sent from " + sms.getFromPhoneNumber() + " to " + sms.getToPhoneNumber());
     }
+
+    @Override
+    public boolean supports(Channel channel) {
+        return channel instanceof SMS;
+    }
 }

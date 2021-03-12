@@ -16,4 +16,9 @@ public class EmailSender implements ChannelSender {
         System.out.println("message send to Email: " + message.toString());
         System.out.println("email: sent from " + email.getFromEmailAddress() + " to " + email.getToEmailAddress());
     }
+
+    @Override
+    public boolean supports(Channel channel) {
+        return channel instanceof Email;
+    }
 }

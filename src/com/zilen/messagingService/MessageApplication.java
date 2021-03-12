@@ -7,6 +7,7 @@ import com.zilen.messagingService.entity.attachment.Document;
 import com.zilen.messagingService.entity.attachment.Picture;
 import com.zilen.messagingService.entity.channel.Facebook;
 import com.zilen.messagingService.service.MessageRedirectingService;
+import com.zilen.messagingService.service.UserService;
 import com.zilen.messagingService.service.channelSender.EmailSender;
 import com.zilen.messagingService.service.channelSender.FacebookSender;
 import com.zilen.messagingService.service.channelSender.SMSSender;
@@ -55,7 +56,8 @@ public class MessageApplication {
         FacebookSender facebookSender = new FacebookSender();
         SMSSender smsSender = new SMSSender();
 
-        MessageRedirectingService messageRedirectingService = new MessageRedirectingService(List.of(smsSender, emailSender, facebookSender));
+        UserService userService = new UserService();
+        MessageRedirectingService messageRedirectingService = new MessageRedirectingService(List.of(smsSender, emailSender, facebookSender), userService);
         messageRedirectingService.redirect(message);
 
     }

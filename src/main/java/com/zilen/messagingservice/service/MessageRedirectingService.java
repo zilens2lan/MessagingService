@@ -3,6 +3,8 @@ package com.zilen.messagingservice.service;
 import com.zilen.messagingservice.entity.Message;
 import com.zilen.messagingservice.entity.channel.Channel;
 import com.zilen.messagingservice.service.channelSender.ChannelSender;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

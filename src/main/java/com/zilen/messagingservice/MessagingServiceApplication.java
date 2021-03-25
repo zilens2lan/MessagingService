@@ -1,63 +1,32 @@
 package com.zilen.messagingservice;
 
-import com.zilen.messagingservice.entity.Message;
-import com.zilen.messagingservice.entity.attachment.Audio;
-import com.zilen.messagingservice.entity.attachment.Document;
-import com.zilen.messagingservice.entity.attachment.Picture;
-import com.zilen.messagingservice.entity.channel.Facebook;
-import com.zilen.messagingservice.service.MessageRedirectingService;
-import com.zilen.messagingservice.service.UserService;
-import com.zilen.messagingservice.service.channelSender.EmailSender;
-import com.zilen.messagingservice.service.channelSender.FacebookSender;
-import com.zilen.messagingservice.service.channelSender.SMSSender;
+import com.zilen.messagingservice.repository.ChannelRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
+@Configuration
+@EnableMongoRepositories
+@Import(RepositoryRestMvcConfiguration.class)
+@EnableAutoConfiguration
+@ComponentScan
+public class MessagingServiceApplication implements CommandLineRunner {
 
-public class MessagingServiceApplication {
+    @Autowired
+    private ChannelRepository channelRepository;
 
     public static void main(String[] args) {
-        System.out.println("start");
+        SpringApplication.run(MessagingServiceApplication.class, args);
+    }
 
-        Document document = Document.builder()
-                .id(UUID.randomUUID())
-                .title("document")
-                .format("doc")
-                .size(Byte.MAX_VALUE)
-                .build();
-        Picture picture = Picture.builder()
-                .id(UUID.randomUUID())
-                .title("picture")
-                .format("png")
-                .height(1080)
-                .width(1920)
-                .build();
-        Audio audio = Audio.builder()
-                .id(UUID.randomUUID())
-                .title("audio")
-                .format("mp3")
-                .duration(Duration.ofSeconds(364))
-                .build();
-
-        Message message = Message.builder()
-                .id(UUID.randomUUID())
-                .userName("Zilen")
-                .text("Text Text Text")
-                .dateTime(LocalDateTime.now())
-                .attachments(List.of(document, picture, audio))
-                .build();
-
-        System.out.println("message: " + message.toString());
-
-        EmailSender emailSender = new EmailSender();
-        FacebookSender facebookSender = new FacebookSender();
-        SMSSender smsSender = new SMSSender();
-
-        UserService userService = new UserService();
-        MessageRedirectingService messageRedirectingService = new MessageRedirectingService(List.of(smsSender, emailSender, facebookSender), userService);
-        messageRedirectingService.redirect(message);
-
+    @Override
+    public void run(String... args) throws Exception {
+        channelRepository.deleteAll();
     }
 }

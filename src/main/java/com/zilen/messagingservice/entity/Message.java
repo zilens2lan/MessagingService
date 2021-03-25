@@ -3,7 +3,8 @@ package com.zilen.messagingservice.entity;
 import com.zilen.messagingservice.entity.attachment.Attachment;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,13 +14,10 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 public class Message {
 
-    @NonNull
+    @Id
     private UUID id;
-    @NonNull
     private String userName;
-    @NonNull
     private String text;
-    @NonNull
     private LocalDateTime dateTime;
     private List<Attachment> attachments;
 

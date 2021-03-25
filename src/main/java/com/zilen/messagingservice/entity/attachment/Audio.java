@@ -3,6 +3,7 @@ package com.zilen.messagingservice.entity.attachment;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import org.springframework.data.annotation.Id;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -11,9 +12,8 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 public class Audio implements Attachment {
 
-    @NonNull
+    @Id
     private UUID id;
-    @NonNull
     private String title;
     private String format;
     private Duration duration;

@@ -19,8 +19,6 @@ public class MessageRedirectingService {
     }
 
     public void redirect(Message message) {
-        System.out.println("redirect");
-
         List<Channel> channels = userService.getUserChannels(message.getUserName());
 
         channels.forEach(channel -> channelSenders.stream()

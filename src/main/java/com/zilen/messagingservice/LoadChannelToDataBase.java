@@ -4,21 +4,22 @@ import com.zilen.messagingservice.entity.channel.Email;
 import com.zilen.messagingservice.entity.channel.Facebook;
 import com.zilen.messagingservice.entity.channel.SMS;
 import com.zilen.messagingservice.repository.ChannelRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.UUID;
 
-@Configuration
+@Component
+@RequiredArgsConstructor
 public class LoadChannelToDataBase {
 
-    private static final Logger log = LoggerFactory.getLogger(LoadChannelToDataBase.class);
+    private final ChannelRepository channelRepository;
 
-    @Bean
-    CommandLineRunner initChannelDataBase(ChannelRepository channelRepository){
+    @PostConstruct
+    public void initChannelDataBase() {
+        channelRepository.deleteAll();
         SMS sms1 = SMS.builder()
                 .id(UUID.randomUUID())
                 .userName("Zilen")
@@ -49,13 +50,6 @@ public class LoadChannelToDataBase {
                 .fromFacebookId("@id_zilen")
                 .toFacebookId("@id_facebook")
                 .build();
-
-        return args -> {
-            log.info("Preloading " +channelRepository.save(sms1));
-            log.info("Preloading " +channelRepository.save(sms2));
-            log.info("Preloading " +channelRepository.save(sms3));
-            log.info("Preloading " +channelRepository.save(email));
-            log.info("Preloading " +channelRepository.save(facebook));
-        };
+        channelRepository.saveAll(List.of(sms1, sms2, sms3, email, facebook));
     }
 }

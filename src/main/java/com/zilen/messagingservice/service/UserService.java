@@ -2,21 +2,16 @@ package com.zilen.messagingservice.service;
 
 import com.zilen.messagingservice.entity.channel.Channel;
 import com.zilen.messagingservice.repository.ChannelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
+@Component
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private ChannelRepository channelRepository;
-
-    public UserService(ChannelRepository channelRepository){
-        this.channelRepository = channelRepository;
-    }
+    private final ChannelRepository channelRepository;
 
     public List<Channel> getUserChannels(String userName) {
         List<Channel> channels = channelRepository.findByUserName(userName);

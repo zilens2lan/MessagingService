@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Document
 @Data
 @Builder(toBuilder = true)
 public class Message {
 
-    @Id
     private UUID id;
     private String userName;
     private String text;

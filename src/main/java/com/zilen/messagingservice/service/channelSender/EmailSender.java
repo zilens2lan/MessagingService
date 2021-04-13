@@ -3,9 +3,11 @@ package com.zilen.messagingservice.service.channelSender;
 import com.zilen.messagingservice.entity.Message;
 import com.zilen.messagingservice.entity.channel.Channel;
 import com.zilen.messagingservice.entity.channel.Email;
+import org.springframework.stereotype.Component;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Component
 public class EmailSender implements ChannelSender {
 
     @Override

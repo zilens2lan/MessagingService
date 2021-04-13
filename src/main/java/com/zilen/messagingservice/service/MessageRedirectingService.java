@@ -1,11 +1,13 @@
 package com.zilen.messagingservice.service;
 
+import com.zilen.messagingservice.config.MessageRedirectingServiceConfig;
 import com.zilen.messagingservice.entity.Message;
 import com.zilen.messagingservice.entity.channel.Channel;
 import com.zilen.messagingservice.repository.ChannelRepository;
 import com.zilen.messagingservice.service.channelSender.ChannelSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,6 +20,10 @@ public class MessageRedirectingService {
     private final UserService userService;
 
     public void redirect(Message message) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MessageRedirectingServiceConfig.class);
+        MessageRedirectingService messageRedirectingService = context.getBean(MessageRedirectingService.class);
+        messageRedirectingService.redirect(message);
+
         List<Channel> channels = userService.getUserChannels(message.getUserName());
 
         channels.forEach(channel -> channelSenders.stream()

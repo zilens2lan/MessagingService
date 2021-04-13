@@ -5,6 +5,8 @@ import com.zilen.messagingservice.entity.Message;
 import com.zilen.messagingservice.entity.attachment.Audio;
 import com.zilen.messagingservice.entity.attachment.Document;
 import com.zilen.messagingservice.entity.attachment.Picture;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,10 @@ import java.util.UUID;
 @Service
 public class MessageService {
 
+    @Autowired
+    private MessageRedirectingService messageRedirectingService;
+
     public void send() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MessageRedirectingServiceConfig.class);
-        MessageRedirectingService messageRedirectingService = context.getBean(MessageRedirectingService.class);
         messageRedirectingService.redirect(createMessage());
     }
 

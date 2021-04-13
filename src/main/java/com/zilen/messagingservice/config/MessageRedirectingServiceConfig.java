@@ -12,20 +12,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.mongodb.repository.support.SimpleMongoRepository;
 
 import java.util.List;
 
 @Configuration
-@RequiredArgsConstructor
 public class MessageRedirectingServiceConfig {
 
-    private final ChannelRepository channelRepository;
+    @Autowired
+    private ChannelRepository channelRepository;
 
     @Bean
-    public MessageRedirectingService redirect(){
+    public List<ChannelSender> channelSenders(){
         EmailSender emailSender = new EmailSender();
         FacebookSender facebookSender = new FacebookSender();
         SMSSender smsSender = new SMSSender();
-        return new MessageRedirectingService(List.of(emailSender, facebookSender, smsSender), new UserService(channelRepository));
+        return List.of(emailSender, facebookSender, smsSender);
+    }
+
+    @Bean
+    public UserService getUserService(){
+        return new UserService(channelRepository);
+    }
+
+    @Bean
+    public MessageRedirectingService getBean(){
+        return new MessageRedirectingService(channelSenders(), getUserService());
     }
 }

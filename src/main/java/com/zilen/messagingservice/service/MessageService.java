@@ -1,13 +1,10 @@
 package com.zilen.messagingservice.service;
 
-import com.zilen.messagingservice.config.MessageRedirectingServiceConfig;
 import com.zilen.messagingservice.entity.Message;
 import com.zilen.messagingservice.entity.attachment.Audio;
 import com.zilen.messagingservice.entity.attachment.Document;
 import com.zilen.messagingservice.entity.attachment.Picture;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -16,10 +13,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
 
-    @Autowired
-    private MessageRedirectingService messageRedirectingService;
+    private final MessageRedirectingService messageRedirectingService;
 
     public void send() {
         messageRedirectingService.redirect(createMessage());

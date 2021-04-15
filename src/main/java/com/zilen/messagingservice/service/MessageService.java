@@ -18,8 +18,8 @@ public class MessageService {
 
     private final MessageRedirectingService messageRedirectingService;
 
-    public void send() {
-        messageRedirectingService.redirect(createMessage());
+    public void send(Message message) {
+        messageRedirectingService.redirect(message);
     }
 
     public Message createMessage() {

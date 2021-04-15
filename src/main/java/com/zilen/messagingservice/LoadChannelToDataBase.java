@@ -20,36 +20,12 @@ public class LoadChannelToDataBase {
     @PostConstruct
     public void initChannelDataBase() {
         channelRepository.deleteAll();
-        SMS sms1 = SMS.builder()
-                .id(UUID.randomUUID())
-                .userName("Zilen")
-                .fromPhoneNumber("375297195905")
-                .toPhoneNumber("375295942824")
-                .build();
-        SMS sms3 = SMS.builder()
-                .id(UUID.randomUUID())
-                .userName("Zilen")
-                .fromPhoneNumber("375295979644")
-                .toPhoneNumber("375295942828")
-                .build();
-        SMS sms2 = SMS.builder()
-                .id(UUID.randomUUID())
-                .userName("Ripok")
-                .fromPhoneNumber("375295941828")
-                .toPhoneNumber("375295942825")
-                .build();
-        Email email = Email.builder()
-                .id(UUID.randomUUID())
-                .userName("Ripok")
-                .fromEmailAddress("ZilenS2Lan@mail.ru")
-                .toEmailAddress("zilens2lan@gmail.com")
-                .build();
-        Facebook facebook = Facebook.builder()
-                .id(UUID.randomUUID())
-                .userName("Zilen")
-                .fromFacebookId("@id_zilen")
-                .toFacebookId("@id_facebook")
-                .build();
+
+        SMS sms1 = new SMS(UUID.randomUUID(), "Zilen", "375297195905", "375295942824");
+        SMS sms2 = new SMS(UUID.randomUUID(), "Zilen", "3755901114", "375295979644");
+        SMS sms3 = new SMS(UUID.randomUUID(), "Ripok", "37529719595", "375295971114");
+        Email email = new Email(UUID.randomUUID(), "Ripok", "zilens2lan@gmail.com", "zilencompany@mail.ru");
+        Facebook facebook = new Facebook(UUID.randomUUID(), "Zilen", "@id_facebook", "@id_Zilen");
         channelRepository.saveAll(List.of(sms1, sms2, sms3, email, facebook));
     }
 }

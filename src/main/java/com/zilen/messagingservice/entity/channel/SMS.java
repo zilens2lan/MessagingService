@@ -1,20 +1,34 @@
 package com.zilen.messagingservice.entity.channel;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
-@Document
-@Data
-@Builder(toBuilder = true)
-public class SMS implements Channel {
+@EqualsAndHashCode(callSuper = true)
+public class SMS extends Channel {
 
-    private UUID id;
-    private String userName;
     private String fromPhoneNumber;
     private String toPhoneNumber;
+
+    public SMS(UUID id, String userName, String fromPhoneNumber, String toPhoneNumber) {
+        super(id, userName);
+        this.fromPhoneNumber = fromPhoneNumber;
+        this.toPhoneNumber = toPhoneNumber;
+    }
+
+    public String getFromPhoneNumber() {
+        return fromPhoneNumber;
+    }
+
+    public void setFromPhoneNumber(String fromPhoneNumber) {
+        this.fromPhoneNumber = fromPhoneNumber;
+    }
+
+    public String getToPhoneNumber() {
+        return toPhoneNumber;
+    }
+
+    public void setToPhoneNumber(String toPhoneNumber) {
+        this.toPhoneNumber = toPhoneNumber;
+    }
 }

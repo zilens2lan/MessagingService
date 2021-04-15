@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -16,25 +15,21 @@ public class ChannelService {
 
     private final ChannelRepository channelRepository;
 
-    public List<Channel> findByUserName(String userName){
+    public List<Channel> findByUserName(String userName) {
         return channelRepository.findByUserName(userName);
     }
 
-    public void addChannel(Channel channel){
+    public void addChannel(Channel channel) {
         channelRepository.save(channel);
     }
 
-    public Channel findById(UUID id){
+    public Channel findById(UUID id) {
         return channelRepository.findById(id)
-                .orElseThrow(()->
-                new ChannelNotFoundException(id));
+                .orElseThrow(() ->
+                        new ChannelNotFoundException(id));
     }
 
-    public void deleteChannel(UUID id){
-        try{
-            channelRepository.deleteById(id);
-        }catch (ChannelNotFoundException ex){
-            ex.printStackTrace();
-        }
+    public void deleteChannel(UUID id) {
+        channelRepository.deleteById(id);
     }
 }

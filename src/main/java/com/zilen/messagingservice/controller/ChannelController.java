@@ -18,25 +18,25 @@ public class ChannelController {
 
     @GetMapping("/userChannels")
     @ResponseStatus(HttpStatus.OK)
-    public List<Channel> getChannelsByUserName(@RequestParam(defaultValue = "Zilen") String userName) {
+    public List<Channel> getChannelsByUserName(@RequestParam(name = "userName", required = false) String userName) {
         return channelService.findByUserName(userName);
     }
 
     @PostMapping("/channel")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addChannel(@RequestBody Channel channel){
+    public void addChannel(@RequestBody Channel channel) {
         channelService.addChannel(channel);
     }
 
-    @GetMapping("/channel")
+    @GetMapping("/channel/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Channel findById(@RequestParam UUID id){
+    public Channel findById(@PathVariable UUID id) {
         return channelService.findById(id);
     }
 
-    @DeleteMapping("/channel")
+    @DeleteMapping("/channel/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteChannel(@RequestParam UUID id){
+    public void deleteChannel(@PathVariable UUID id) {
         channelService.deleteChannel(id);
     }
 }

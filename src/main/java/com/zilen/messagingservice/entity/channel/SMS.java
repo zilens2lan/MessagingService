@@ -1,10 +1,16 @@
 package com.zilen.messagingservice.entity.channel;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
+@ToString
 public class SMS extends Channel {
 
     private String fromPhoneNumber;
@@ -13,22 +19,6 @@ public class SMS extends Channel {
     public SMS(UUID id, String userName, String fromPhoneNumber, String toPhoneNumber) {
         super(id, userName);
         this.fromPhoneNumber = fromPhoneNumber;
-        this.toPhoneNumber = toPhoneNumber;
-    }
-
-    public String getFromPhoneNumber() {
-        return fromPhoneNumber;
-    }
-
-    public void setFromPhoneNumber(String fromPhoneNumber) {
-        this.fromPhoneNumber = fromPhoneNumber;
-    }
-
-    public String getToPhoneNumber() {
-        return toPhoneNumber;
-    }
-
-    public void setToPhoneNumber(String toPhoneNumber) {
         this.toPhoneNumber = toPhoneNumber;
     }
 }

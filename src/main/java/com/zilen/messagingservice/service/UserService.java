@@ -15,9 +15,6 @@ public class UserService {
 
     public List<Channel> getUserChannels(String userName) {
         List<Channel> channels = channelRepository.findByUserName(userName);
-        if (channels.isEmpty()) {
-            throw new IllegalStateException("Such User has no channels");
-        }
         return channels;
     }
 }

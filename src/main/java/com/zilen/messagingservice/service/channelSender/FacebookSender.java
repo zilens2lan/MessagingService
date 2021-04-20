@@ -20,7 +20,7 @@ public class FacebookSender implements ChannelSender {
 
     @Override
     public void send(Message message, Channel channel) {
-        assertTrue(channel instanceof Facebook, "WRONG TYPE!!!");
+        assertTrue(channel instanceof Facebook, "Channel type does not match 'Facebook' !!!");
         Facebook facebook = ((Facebook) channel);
 
         Message messageFiltered = Message.builder()

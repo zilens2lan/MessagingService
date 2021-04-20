@@ -12,7 +12,7 @@ public class SMSSender implements ChannelSender {
 
     @Override
     public void send(Message message, Channel channel) {
-        assertTrue(channel instanceof SMS, "WRONG TYPE!!!");
+        assertTrue(channel instanceof SMS, "Channel type does not match 'SMS' !!!");
         SMS sms = ((SMS) channel);
 
         Message messageFiltered = Message.builder()

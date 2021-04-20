@@ -1,12 +1,12 @@
 package com.zilen.messagingservice.service;
 
 import com.zilen.messagingservice.entity.channel.Channel;
-import com.zilen.messagingservice.exception.ChannelNotFoundException;
 import com.zilen.messagingservice.repository.ChannelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,13 +23,23 @@ public class ChannelService {
         channelRepository.save(channel);
     }
 
-    public Channel findById(UUID id) {
-        return channelRepository.findById(id)
+    public Optional<Channel> findById(UUID id) {
+        return Optional.of(channelRepository.findById(id)
                 .orElseThrow(() ->
-                        new ChannelNotFoundException(id));
+                        new RuntimeException("Channel '" + id + "' not found")));
     }
 
     public void deleteChannel(UUID id) {
         channelRepository.deleteById(id);
+    }
+
+    public Optional<Channel> updateChannel(UUID id, Channel updatedChannel) {
+        return Optional.of(channelRepository.findById(id)
+                .map(channel -> {
+                    channel = updatedChannel;
+                    return channelRepository.save(channel);
+                })
+                .orElseThrow(() ->
+                        new RuntimeException("Channel '" + id + "' not found")));
     }
 }

@@ -1,10 +1,16 @@
 package com.zilen.messagingservice.entity.channel;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
+@ToString
 public class Facebook extends Channel {
 
     private String fromFacebookId;
@@ -15,22 +21,4 @@ public class Facebook extends Channel {
         this.fromFacebookId = fromFacebookId;
         this.toFacebookId = toFacebookId;
     }
-
-    public String getFromFacebookId() {
-        return fromFacebookId;
-    }
-
-    public void setFromFacebookId(String fromFacebookId) {
-        this.fromFacebookId = fromFacebookId;
-    }
-
-    public String getToFacebookId() {
-        return toFacebookId;
-    }
-
-    public void setToFacebookId(String toFacebookId) {
-        this.toFacebookId = toFacebookId;
-    }
-
-
 }

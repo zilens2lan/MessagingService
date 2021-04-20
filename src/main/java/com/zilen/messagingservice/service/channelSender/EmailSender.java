@@ -12,7 +12,7 @@ public class EmailSender implements ChannelSender {
 
     @Override
     public void send(Message message, Channel channel) {
-        assertTrue(channel instanceof Email, "WRONG TYPE!!!");
+        assertTrue(channel instanceof Email, "Channel type does not match 'Email' !!!");
         Email email = ((Email) channel);
 
         System.out.println("message send to Email: " + message.toString());

@@ -14,9 +14,11 @@ public class MessageRedirectingService {
 
     private final List<ChannelSender> channelSenders;
     private final UserService userService;
+    private final MessageService messageService;
 
     public void redirect(Message message) {
         List<Channel> channels = userService.getUserChannels(message.getUserName());
+        messageService.saveMessage(message);
 
         channels.forEach(channel -> channelSenders.stream()
                 .filter(channelSender ->
